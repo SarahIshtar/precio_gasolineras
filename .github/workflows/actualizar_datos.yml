@@ -1,0 +1,34 @@
+name: Actualizar precios de carburantes
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # todos los días a las 06:00 UTC (8:00 en verano, 7:00 en invierno)
+  workflow_dispatch:       # botón para lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write          # necesario para guardar el CSV en el repositorio
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar librerías
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar el script
+        run: python precios_carburantes.py
+
+      - name: Guardar los datos nuevos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add datos_mapa
+          git diff --staged --quiet || (git commit -m "Datos actualizados $(date -u +'%Y-%m-%d')" && git push)
