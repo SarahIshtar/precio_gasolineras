@@ -44,7 +44,7 @@ NOMBRES_INE = {
 # El mapa de Datawrapper usa la forma castellana de algunos nombres.
 # Solo hace falta poner aquí los que no coinciden con NOMBRES_INE.
 NOMBRES_DATAWRAPPER = {
-    "07": "Islas Baleares", "15": "La Coruña", "17": "Gerona",
+    "07": "Baleares", "15": "La Coruña", "17": "Gerona",
     "25": "Lérida", "32": "Orense",
 }
 
