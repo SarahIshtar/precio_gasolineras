@@ -184,7 +184,7 @@ def exportar_mapas(df: pd.DataFrame, actualizado: str) -> None:
         # Nota al pie que se actualiza sola en Datawrapper
         nota = (f"Datos actualizados: {actualizado}. "
                 f"Precio medio nacional {etiqueta}: {fmt(df[col_precio].mean())} €/l.")
-        meta = {"metadata": {"annotate": {"notes": nota}}}
+        meta = {"annotate": {"notes": nota}}
         (RUTA_MAPA / f"metadata_{nombre}.json").write_text(
             json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
 
